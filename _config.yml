@@ -1,14 +1,14 @@
-title: My Blog
-description: Just another Jekyll site
+title: bolg
+description: jekyll blog test
 theme: minima
 baseurl: ""
 url: "https://yourusername.github.io"
 
 # Navigation links
 nav:
-  - name: "About"
+  - name: "about"
     link: /about/
-  - name: "Blog"
+  - name: "blog"
     link: /blog/
-  - name: "Writeups"
+  - name: "writeups"
     link: /writeups/

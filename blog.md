@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Blog
+title: blog
 permalink: /blog/
 ---
 List of blog posts will go here.
