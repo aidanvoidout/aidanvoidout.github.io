@@ -124,8 +124,11 @@ flag: SENTI{I_L0v3_GP!1!}
 
 ## > Nonsense (Crypto, 150)
 we are given a string of emojis, 🥰😆🙂😘🤣{😚😂😛😁🤣😁😛🙃😗😁🙃😘😂🤣🥰} which obviously resembles a flag format.
+
 at first, i attempted to tackle this by moduloing the unicode of each emoji by 26 to find a correlation by looking at the first five emojis which should correspond to SENTI, but this yielded no results
+
 a friend then figured out that the emojis correspond to the first 26 emojis on a phone keypad. with this, we can uncover the flag.
 
 23, 8, 25, 4, 9, 4, 25, 15, 21, 4, 15, 20, 8, 9, 19 = W H Y D I D Y O U D O T H I S
+
 flag: SENTI{WHYDIDYOUDOTHIS}
