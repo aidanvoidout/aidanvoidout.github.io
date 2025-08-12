@@ -45,6 +45,17 @@ our clues:
 using common sense, we can deduce that said location is singapore's marina bay sands
 flag: SENTI{Marina_Bay_Sands} (probably, can't double check)
 
+## > Fisch (OSINT, 150)
+we are given a roblox screenshot of an npc.
+
+we can visit the fisch fandom wiki and search up the Category for NPCs.
+
+upon looking around, the NPC's likeness can be found under Islands/Snowcap Island, named Wilson.
+
+by going to Wilson's wiki page, we can find the coordinates to the missing item:  X: 2880, Y: 138, Z: 2723.
+
+flag: SENTI{2880,138,2723}
+
 ## > Work 1 (OSINT, 200)
 we are provided the image of someone's brawl stars account
 
@@ -98,3 +109,23 @@ MIHOYO
 BUTCHER VANITY
 AYASE
 BUG
+
+## > i hate gp (Crypto, 100)
+we are given a text file of strings of i_hategp.
+
+each character in each i_hategp can vary. the letters can be upper or lower, while the underscore can be replaced with a space ( ). since the characters are grouped in 8s and the characters can have two variations each, it can be inferred that this cipher is binary. 
+
+through trial and error, the binary conversion can be inferred through two rules
+if the second character is an underscore, the bit is 1, if it is a space then the bit is 0
+if any letter is uppercase the bit is 1, otherwise the bit is 0
+
+by putting it into chatgpt and telling it the rules, we can uncover the flag.
+flag: SENTI{I_L0v3_GP!1!}
+
+## > Nonsense (Crypto, 150)
+we are given a string of emojis, 🥰😆🙂😘🤣{😚😂😛😁🤣😁😛🙃😗😁🙃😘😂🤣🥰} which obviously resembles a flag format.
+at first, i attempted to tackle this by moduloing the unicode of each emoji by 26 to find a correlation by looking at the first five emojis which should correspond to SENTI, but this yielded no results
+a friend then figured out that the emojis correspond to the first 26 emojis on a phone keypad. with this, we can uncover the flag.
+
+23, 8, 25, 4, 9, 4, 25, 15, 21, 4, 15, 20, 8, 9, 19 = W H Y D I D Y O U D O T H I S
+flag: SENTI{WHYDIDYOUDOTHIS}
