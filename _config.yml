@@ -1,0 +1,22 @@
+title: "aidans scribbles"
+description: "Personal site"
+url: "https://aidanvoidout.github.io"
+baseurl: ""
+
+markdown: kramdown
+theme: minima  # optional, remove if you want full control
+
+collections:
+  writeups:
+    output: true
+    permalink: /writeups/:title/
+
+highlighter: rouge
+
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false   # set to true if you want numbered lines
+    span:
+      line_numbers: false

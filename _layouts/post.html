@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<h1>{{ page.title }}</h1>
+<p><small>{{ page.date | date: "%B %d, %Y" }}</small></p>
+
+<div class="content">
+  {{ content }}
+</div>
+
+<!-- Utterances comments -->
+<div id="comments">
+  <script src="https://utteranc.es/client.js"
+          repo="aidanvoidout/aidanvoidout.github.io"
+          issue-term="pathname"
+          theme="github-light"
+          crossorigin="anonymous"
+          async>
+  </script>
+</div>
