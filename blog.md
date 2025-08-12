@@ -1,6 +1,14 @@
 ---
-layout: page
-title: blog
+layout: default
+title: Blog
 permalink: /blog/
 ---
-List of blog posts will go here.
+<h1>Blog</h1>
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <small>{{ post.date | date: "%Y-%m-%d" }}</small>
+    </li>
+  {% endfor %}
+</ul>
