@@ -166,7 +166,7 @@ which translates to
 
 flag: SENTI{WHYDIDYOUDOTHIS}
 
-## > Soundcheck (Forensics, 150) + first blood
+## > Soundcheck (Forensics, 150)
 
 we are presented with a zip full of .wav audio files.
 
@@ -177,3 +177,11 @@ upon listening to said .wav, the audio sounds very reminiscent of morse code.
 placing the audio into a morse decoder yields the flag.
 
 flag: SENTI{BBEEEBEEPBOOPBEEEEEEPBOOPBOPBOPBOPBBOPBOP}
+
+## > Math (Misc, 200) + i have no idea how i got first blood on this
+
+we are presented with a .py file with many lines of mathematical statements (that arent python code)
+
+since the file is literally called `desmos.py` i copy and paste everything into my king Desmos Graphing Calculator and it yields the flag.
+
+flag: SENTI{I_LOVE_GRAPHS}
