@@ -138,19 +138,6 @@ searching up the username NOMOREBRAWL on pastebin, we can find the employee's pa
 
 flag: SENTI{wasitacaroracatisaw}
 
-## > Vexdru's Wardrobe (OSINT, 200)
-
-
-## > Vocaloid quiz (OSINT, 1000) -- why???
-YOUNG GIRL A
-IEVAN POLKKA
-LAGTRAIN
-ASHITE ASHITE ASHITE
-MIHOYO
-BUTCHER VANITY
-AYASE
-BUG
-
 ## > i hate gp (Crypto, 100)
 we are given a text file of strings of i_hategp.
 
