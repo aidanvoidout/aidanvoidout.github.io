@@ -1,8 +1,20 @@
-<div class="sidebar" style="width: 200px; height: 100%; float: left; padding: 1em; background: #f4f4f4;">
-    <h3>Menu</h3>
-    <ul style="list-style: none; padding: 0;">
-      {% for item in site.nav %}
-        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
-      {% endfor %}
-    </ul>
+<div class="sidebar" style="
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #f4f4f4;
+    padding: 1em;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+">
+  <h2 style="margin-top: 0;">My Blog</h2>
+  <ul style="list-style: none; padding: 0;">
+    {% for item in site.nav %}
+      <li style="margin: 0.5em 0;">
+        <a href="{{ item.link }}">{{ item.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
 </div>

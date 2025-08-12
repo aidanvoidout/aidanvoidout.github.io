@@ -4,10 +4,20 @@
   <meta charset="utf-8">
   <title>{{ page.title }} | {{ site.title }}</title>
   <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+    .content {
+      margin-left: 220px; /* space for sidebar */
+      padding: 1em;
+    }
+  </style>
 </head>
 <body>
   {% include sidebar.html %}
-  <div style="margin-left: 220px; padding: 1em;">
+  <div class="content">
     {{ content }}
   </div>
 </body>
