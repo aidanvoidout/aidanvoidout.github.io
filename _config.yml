@@ -1,0 +1,14 @@
+title: My Blog
+description: Just another Jekyll site
+theme: minima
+baseurl: ""
+url: "https://yourusername.github.io"
+
+# Navigation links
+nav:
+  - name: "About"
+    link: /about/
+  - name: "Blog"
+    link: /blog/
+  - name: "Writeups"
+    link: /writeups/

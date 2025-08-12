@@ -1,7 +1,6 @@
 ---
-layout: default
+layout: page
 title: Writeups
 permalink: /writeups/
 ---
-# Writeups
-Writeups go here.
+This is where writeups will go.

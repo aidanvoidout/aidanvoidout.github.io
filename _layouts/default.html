@@ -1,45 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
-  <head>
-    {%- include head.html -%}
-    <style>
-      body {
-        display: flex;
-        max-width: 1200px;
-        margin: auto;
-      }
-      .sidebar {
-        width: 200px;
-        padding: 20px;
-        background: #f7f7f7;
-        border-right: 1px solid #ccc;
-      }
-      .sidebar a {
-        display: block;
-        padding: 5px 0;
-        color: #333;
-        text-decoration: none;
-      }
-      .sidebar a:hover {
-        text-decoration: underline;
-      }
-      .content {
-        flex: 1;
-        padding: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="sidebar">
-      <h3>Navigation</h3>
-      <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/about' | relative_url }}">About</a>
-      <a href="{{ '/blog' | relative_url }}">Blog</a>
-      <a href="{{ '/writeups' | relative_url }}">Writeups</a>
-    </div>
-
-    <div class="content">
-      {{ content }}
-    </div>
-  </body>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ page.title }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+</head>
+<body>
+  {% include sidebar.html %}
+  <div style="margin-left: 220px; padding: 1em;">
+    {{ content }}
+  </div>
+</body>
 </html>
