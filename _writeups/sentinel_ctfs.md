@@ -81,6 +81,7 @@ our clues:
 - near somewhere with over 100 haute coutre pieces (i have no idea what this refers to)
 
 using common sense, we can deduce that said location is singapore's marina bay sands
+
 flag: SENTI{Marina_Bay_Sands} (probably, can't double check)
 
 ## > Fisch (OSINT, 150)
@@ -164,3 +165,15 @@ which translates to
 `W H Y D I D Y O U D O T H I S`
 
 flag: SENTI{WHYDIDYOUDOTHIS}
+
+## > Soundcheck (Forensics, 150) + first blood
+
+we are presented with a zip full of .wav audio files.
+
+upon taking a look at the contents, i sort the contents by file size, and one file stands out as larger due to its 3789kb file size as compared to the other .wav's 173 kb.
+
+upon listening to said .wav, the audio sounds very reminiscent of morse code.
+
+placing the audio into a morse decoder yields the flag.
+
+flag: SENTI{BBEEEBEEPBOOPBEEEEEEPBOOPBOPBOPBOPBBOPBOP}
