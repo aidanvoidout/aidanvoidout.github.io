@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Blog
+title: blog
 permalink: /blog/
 ---
 <h1>Blog</h1>
