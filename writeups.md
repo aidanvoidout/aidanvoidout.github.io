@@ -1,6 +1,13 @@
 ---
 layout: page
-title: writeups
+title: Writeups
 permalink: /writeups/
 ---
-This is where writeups will go.
+
+<ul>
+  {% for writeup in site.writeups %}
+    <li>
+      <a href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

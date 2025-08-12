@@ -12,3 +12,8 @@ nav:
     link: /blog/
   - name: "writeups"
     link: /writeups/
+
+collections:
+  writeups:
+    output: true
+    permalink: /writeups/:path/
