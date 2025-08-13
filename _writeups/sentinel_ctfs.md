@@ -54,7 +54,7 @@ using the payload `sql ' OR 1=1;--` or similar simply reflects the input as is w
 
 next i attempted ssti using the jinja2 payload `jinja2{{7*7}}` but the input was again, simply reflected
 
-i then did some googling and found the payload `{{<%[%'"}}%\.` on https://www.imperva.com/learn/application-security/server-side-template-injection-ssti/, which managed to throw an error, 'Error: Could not find matching close tag for "<%".'
+i then did some googling and found the payload `text {{<%[%'"}}%\.` on https://www.imperva.com/learn/application-security/server-side-template-injection-ssti/, which managed to throw an error, 'Error: Could not find matching close tag for "<%".'
 
 bingo. according to chatgpt this error comes from EJS (embedded javascript)
 
@@ -149,6 +149,7 @@ if the second character is an underscore, the bit is 1, if it is a space then th
 if any letter is uppercase the bit is 1, otherwise the bit is 0
 
 by putting it into chatgpt and telling it the rules, we can uncover the flag.
+
 flag: SENTI{I_L0v3_GP!1!}
 
 ## > Nonsense (Crypto, 150)
@@ -177,6 +178,10 @@ upon listening to said .wav, the audio sounds very reminiscent of morse code.
 placing the audio into a morse decoder yields the flag.
 
 flag: SENTI{BBEEEBEEPBOOPBEEEEEEPBOOPBOPBOPBOPBBOPBOP}
+
+## > Miku Miku Oo Ee Oo (Misc, 250)
+
+
 
 ## > Math (Misc, 200) + i have no idea how i got first blood on this
 
