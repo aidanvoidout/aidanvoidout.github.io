@@ -7,4 +7,4 @@ title: "scriptCTF challenges"
 we are provided an image of the avocado
 
 obligatory binwalk:
-![binwalk1](../_writeups/scriptctf_images/binwalk1.png)
+![Binwalk output](./scriptctf_images/binwalk1.png)
