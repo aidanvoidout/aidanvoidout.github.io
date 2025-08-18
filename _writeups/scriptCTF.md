@@ -8,4 +8,5 @@ we are provided an image of the avocado
 
 obligatory binwalk:
 
-<img src='scriptctf_images/binwalk1.png'>h
+<img src='scriptctf_images/binwalk1.png' alt='binwalk'>
+
