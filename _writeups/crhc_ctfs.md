@@ -23,7 +23,9 @@ look at the first blog, there's a zipfile that requires a password. it says it r
 now one good friend of mine is john (the ripper), and we can attempt to crack the zip using a wordlist. but what wordlist?
 
 immediately after we find a wordlist by looking at the second blog post
+
 ![blog2](/images/crhc_osint_images/entry2.png)
+
 ![wordlist](/images/crhc_osint_images/wordlist.png)
 
 we feed this wordlist to john and crack the password `good friend`
