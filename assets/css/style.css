@@ -61,30 +61,24 @@ a:hover {
   font-weight: 500;
 }
 
-/* Mobile header (fixed at top) */
-.mobile-header {
-  display: none;
+.mobile-nav-bar {
+  display: none; /* hidden on desktop */
   background: #f7f7f7;
   border-bottom: 1px solid #ddd;
-  padding: 0.8em 1em;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  z-index: 1000;
-  box-sizing: border-box;
+  padding: 0.5em 1em;
+  text-align: center;
 }
 
-.mobile-title {
-  font-weight: bold;
-  font-size: 1.1em;
-  margin-bottom: 0.3em;
-}
-
-.mobile-nav a {
-  margin-right: 1em;
+.mobile-nav-bar a {
+  margin: 0 0.8em;
   color: #333;
+  font-weight: 500;
+  font-size: 0.95em;
+  text-decoration: none;
+}
+
+.mobile-nav-bar a:hover {
+  text-decoration: underline;
 }
 
 /* Main content */
@@ -144,10 +138,10 @@ pre {
   .sidebar {
     display: none;
   }
-  .mobile-header {
+  .mobile-nav-bar {
     display: block;
   }
   .content {
-    padding: 80px 1.2em 1.2em; /* top padding = header height + breathing room */
+    padding: 1.5em 1.2em; /* no extra top padding needed */
   }
 }

@@ -8,16 +8,6 @@
 </head>
 <body>
 
-  <!-- Mobile header (fixed at top) -->
-  <header class="mobile-header">
-    <div class="mobile-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></div>
-    <nav class="mobile-nav">
-      <a href="{{ '/about/' | relative_url }}">about</a>
-      <a href="{{ '/blog/' | relative_url }}">blog</a>
-      <a href="{{ '/writeups/' | relative_url }}">writeups</a>
-    </nav>
-  </header>
-
   <div class="site-wrapper">
     <!-- Sidebar (desktop) -->
     <nav class="sidebar">
@@ -31,6 +21,14 @@
 
     <!-- Main content -->
     <main class="content">
+      <!-- Mobile single-row nav -->
+      <nav class="mobile-nav-bar">
+        <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        <a href="{{ '/about/' | relative_url }}">about</a>
+        <a href="{{ '/blog/' | relative_url }}">blog</a>
+        <a href="{{ '/writeups/' | relative_url }}">writeups</a>
+      </nav>
+
       {{ content }}
     </main>
   </div>
