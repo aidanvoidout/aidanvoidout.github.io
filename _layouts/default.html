@@ -5,7 +5,32 @@
   <title>{{ page.title }} | {{ site.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <style>
+    /* Rouge GitHub-style syntax highlighting */
+    .highlight {
+      background: #f6f8fa;
+      border-radius: 4px;
+      padding: 1em;
+      overflow-x: auto;
+    }
 
+    .highlight .c  { color: #6a737d; font-style: italic } /* Comment */
+    .highlight .k  { color: #d73a49; } /* Keyword */
+    .highlight .o  { color: #d73a49 }  /* Operator */
+    .highlight .cm { color: #6a737d; font-style: italic } /* Comment.Multiline */
+    .highlight .cp { color: #6a737d } /* Comment.Preproc */
+    .highlight .c1 { color: #6a737d; font-style: italic } /* Comment.Single */
+    .highlight .cs { color: #6a737d; font-style: italic } /* Comment.Special */
+    .highlight .gd { color: #b31d28; background-color:#ffeef0 } /* Deleted */
+    .highlight .gi { color: #22863a; background-color:#f0fff4 } /* Inserted */
+    .highlight .s  { color: #032f62 } /* String */
+    .highlight .mi { color: #005cc5 } /* Integer */
+    .highlight .nb { color: #005cc5 } /* Builtin */
+    .highlight .nc { color: #6f42c1 } /* Class */
+    .highlight .nn { color: #6f42c1 } /* Namespace */
+    .highlight .nt { color: #22863a } /* Tag */
+    .highlight .na { color: #6f42c1 } /* Attribute */
+  </style>
   <!-- Jekyll’s main stylesheet -->
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
