@@ -35,17 +35,16 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
-  
+  <header class="mobile-header">
+    <div class="mobile-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></div>
+    <nav class="mobile-nav">
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/writeups/' | relative_url }}">Writeups</a>
+    </nav>
+  </header>
 
   <div class="site-wrapper">
-    <header class="mobile-header">
-      <div class="mobile-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></div>
-      <nav class="mobile-nav">
-        <a href="{{ '/about/' | relative_url }}">About</a>
-        <a href="{{ '/blog/' | relative_url }}">Blog</a>
-        <a href="{{ '/writeups/' | relative_url }}">Writeups</a>
-      </nav>
-    </header>
     <nav class="sidebar">
       <h2 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h2>
       <ul class="nav-links">
