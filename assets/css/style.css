@@ -144,8 +144,10 @@ pre {
   }
   .mobile-header {
     display: block;
+    height: 60px; /* fixed height for header */
+    line-height: 1.4;
   }
   .content {
-    padding: 4em 1.2em 1.2em; /* add top space so header doesn’t overlap text */
+    padding: 80px 1.2em 1.2em; /* 60px header + 20px breathing room */
   }
 }
