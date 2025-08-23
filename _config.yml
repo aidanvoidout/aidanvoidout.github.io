@@ -1,26 +1,54 @@
 title: aidans scribbles
-description: jekyll blog test
-theme: minima
-baseurl: ""
-url: "https://yourusername.github.io"
+description: "jekyll blog test"
+baseurl: "" # leave empty for GitHub Pages user site (username.github.io)
+url: "https://aidanvoidout.github.io" # replace with your actual URL
 
-# Navigation links
-nav:
-  - name: "about"
-    link: /about/
-  - name: "blog"
-    link: /blog/
-  - name: "writeups"
-    link: /writeups/
-
-collections:
-  writeups:
-    output: true
-    permalink: /writeups/:path/
-
+# Markdown & syntax highlighting
 markdown: kramdown
 highlighter: rouge
 
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+
+# Theme (set to minima if you want full minima, or leave blank to use custom layout)
+# theme: minima
+
+# Collections
+collections:
+  writeups:
+    output: true
+    permalink: /writeups/:name/
+
+# Defaults (applies layouts automatically)
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: "writeups"
+    values:
+      layout: post
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# Plugins (only GitHub Pages-safe ones work)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Sass / CSS
+sass:
+  sass_dir: assets/css
+
+# Excludes (files not copied to _site)
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
