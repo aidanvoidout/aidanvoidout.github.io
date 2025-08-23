@@ -17,3 +17,10 @@ collections:
   writeups:
     output: true
     permalink: /writeups/:path/
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
