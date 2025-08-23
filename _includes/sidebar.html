@@ -1,54 +1,5 @@
-<div class="sidebar" style="
-    width: 200px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    background: #f4f4f4;
-    padding: 1em;
-    border-right: 1px solid #ccc;
-    box-sizing: border-box;
-">
-  <style>
-      .sidebar {
-  width: 200px;
-  position: fixed;
-  top: 0;
-  left: -220px; /* hidden off screen */
-  bottom: 0;
-  background: #f4f4f4;
-  padding: 1em;
-  border-right: 1px solid #ccc;
-  box-sizing: border-box;
-  transition: left 0.3s ease;
-  z-index: 1000;
-}
+<div class="sidebar">
 
-.sidebar.open {
-  left: 0; /* slide in */
-}
-
-.menu-toggle {
-  position: fixed;
-  top: 1em;
-  left: 1em;
-  font-size: 1.5em;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1100;
-}
-
-@media (min-width: 768px) {
-  .sidebar {
-    left: 0;
-  }
-  .menu-toggle {
-    display: none;
-  }
-}
-
-  </style>
   <h2 style="margin-top: 0;">scribbles</h2>
   <ul style="list-style: none; padding: 0;">
     {% for item in site.nav %}
