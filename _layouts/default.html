@@ -7,20 +7,23 @@
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
-  <button class="menu-toggle">☰</button>
 
+  <!-- Mobile header -->
+  <div class="mobile-header">
+    <h2>scribbles</h2>
+    <ul>
+      {% for item in site.nav %}
+        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Desktop sidebar -->
   {% include sidebar.html %}
 
   <div class="content">
     {{ content }}
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      document.querySelector(".menu-toggle").addEventListener("click", function() {
-        document.querySelector(".sidebar").classList.toggle("open");
-      });
-    });
-  </script>
 </body>
 </html>
