@@ -1,17 +1,21 @@
 /* Reset some default spacing */
-body, h1, h2, h3, p, ul {
+body, h1, h2, h3, h4, p, ul {
   margin: 0;
   padding: 0;
 }
 
 body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+               Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.6;
-  color: #222;
+  font-size: 16px;
+  color: #24292e; /* GitHub-style text color */
   background: #fff;
+  margin: 0;
 }
 
 a {
-  color: #0077cc;
+  color: #0969da;
   text-decoration: none;
 }
 
@@ -24,7 +28,7 @@ a:hover {
   min-height: 100vh;
 }
 
-/* Sidebar (desktop) */
+/* Sidebar (desktop only) */
 .sidebar {
   width: 220px;
   background: #f7f7f7;
@@ -57,14 +61,16 @@ a:hover {
   font-weight: 500;
 }
 
-/* Mobile header */
+/* Mobile header (fixed at top) */
 .mobile-header {
   display: none;
   background: #f7f7f7;
   border-bottom: 1px solid #ddd;
   padding: 0.8em 1em;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
 }
 
@@ -86,32 +92,10 @@ a:hover {
   max-width: 800px;
 }
 
-/* Responsive rules */
-@media (max-width: 768px) {
-  .sidebar {
-    display: none;
-  }
-  .mobile-header {
-    display: block;
-  }
-  .content {
-    padding: 1.2em;
-  }
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-               Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  line-height: 1.6;
-  font-size: 16px;
-  color: #24292e; /* GitHub-style text color */
-  background: #fff;
-  margin: 0;
-}
-
-
-h1, h2, h3, h4 {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+/* Typography */
+h1, h2, h3, h4, h5, h6,
+.sidebar, .mobile-header, .nav-links a {
+  font-family: inherit;
   font-weight: 600;
   margin: 1.2em 0 0.6em;
 }
@@ -121,12 +105,47 @@ p {
 }
 
 /* Code blocks */
-code, pre {
+pre, code {
   font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.95em;
+  background: #f6f8fa;
+  border-radius: 4px;
 }
-
 
 pre {
   padding: 1em;
   overflow-x: auto;
+}
+
+/* Rouge syntax highlighting base */
+.highlight {
+  background: #f6f8fa;
+  border-radius: 4px;
+  padding: 1em;
+  overflow-x: auto;
+}
+
+/* Example GitHub-like Rouge token colors */
+.highlight .c  { color: #6a737d; font-style: italic } /* Comment */
+.highlight .k  { color: #d73a49 } /* Keyword */
+.highlight .o  { color: #d73a49 } /* Operator */
+.highlight .s  { color: #032f62 } /* String */
+.highlight .mi { color: #005cc5 } /* Integer */
+.highlight .nb { color: #005cc5 } /* Builtin */
+.highlight .nc { color: #6f42c1 } /* Class */
+.highlight .nn { color: #6f42c1 } /* Namespace */
+.highlight .nt { color: #22863a } /* Tag */
+.highlight .na { color: #6f42c1 } /* Attribute */
+
+/* Responsive rules */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+  .mobile-header {
+    display: block;
+  }
+  .content {
+    padding: 4em 1.2em 1.2em; /* add top space so header doesn’t overlap text */
+  }
 }
