@@ -16,6 +16,7 @@ we can look up this username on [Instant Username Lookup](https://instantusernam
 scanning the qr code yields a link to a [notion blog](https://second-eoraptor-5ec.notion.site/Al3x-s-bl0g-real-human-2301e8cf443b80e5ac61cfe552b53221)
 
 hello!
+
 ![hello](/images/crhc_osint_images/hello.png)
 
 look at the first blog, there's a zipfile that requires a password. it says it requires the help of a good friend.
@@ -41,9 +42,11 @@ view the file
 ![ah](/images/crhc_osint_images/open.png)
 
 ah
+
 ![spooky](/images/crhc_osint_images/Headshot.jpg)
 
 run some simple stego to find hidden data
+
 ![final](/images/crhc_osint_images/result%20and%20falg.png)
 
 flag: `CRHC{y0u_4r3_r3411y_900d_47_051n7!!!}`
