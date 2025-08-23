@@ -9,11 +9,7 @@
 <body>
 
   <!-- Mobile header (fixed at top) -->
-  
-
-  <div class="site-wrapper">
-    <!-- Sidebar (desktop) -->
-    <header class="mobile-header">
+  <header class="mobile-header">
     <div class="mobile-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></div>
     <nav class="mobile-nav">
       <a href="{{ '/about/' | relative_url }}">about</a>
@@ -21,6 +17,9 @@
       <a href="{{ '/writeups/' | relative_url }}">writeups</a>
     </nav>
   </header>
+
+  <div class="site-wrapper">
+    <!-- Sidebar (desktop) -->
     <nav class="sidebar">
       <h2 class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h2>
       <ul class="nav-links">

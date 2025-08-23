@@ -1,4 +1,4 @@
-/* Reset some default spacing */
+/* Reset default spacing */
 body, h1, h2, h3, h4, p, ul {
   margin: 0;
   padding: 0;
@@ -9,7 +9,7 @@ body {
                Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   line-height: 1.6;
   font-size: 16px;
-  color: #24292e; /* GitHub-style text color */
+  color: #24292e;
   background: #fff;
   margin: 0;
 }
@@ -71,13 +71,15 @@ a:hover {
   top: 0;
   left: 0;
   right: 0;
+  height: 60px;
   z-index: 1000;
+  box-sizing: border-box;
 }
 
 .mobile-title {
   font-weight: bold;
   font-size: 1.1em;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.3em;
 }
 
 .mobile-nav a {
@@ -117,7 +119,7 @@ pre {
   overflow-x: auto;
 }
 
-/* Rouge syntax highlighting base */
+/* Rouge syntax highlighting */
 .highlight {
   background: #f6f8fa;
   border-radius: 4px;
@@ -144,10 +146,8 @@ pre {
   }
   .mobile-header {
     display: block;
-    height: 60px; /* fixed height for header */
-    line-height: 1.4;
   }
   .content {
-    padding: 80px 1.2em 1.2em; /* 60px header + 20px breathing room */
+    padding: 80px 1.2em 1.2em; /* top padding = header height + breathing room */
   }
 }
