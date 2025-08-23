@@ -1,54 +1,101 @@
-/* Desktop sidebar */
+/* Reset some default spacing */
+body, h1, h2, h3, p, ul {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: #222;
+  background: #fff;
+}
+
+a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.site-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar (desktop) */
 .sidebar {
-  width: 200px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  background: #f4f4f4;
-  padding: 1em;
-  border-right: 1px solid #ccc;
+  width: 220px;
+  background: #f7f7f7;
+  border-right: 1px solid #ddd;
+  padding: 1.5em;
   box-sizing: border-box;
 }
 
-.content {
-  margin-left: 200px;
-  padding: 1em;
+.sidebar .site-title {
+  margin-bottom: 1em;
+}
+
+.sidebar .site-title a {
+  color: #111;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.3em;
+}
+
+.nav-links {
+  list-style: none;
+}
+
+.nav-links li {
+  margin: 0.5em 0;
+}
+
+.nav-links a {
+  color: #333;
+  font-weight: 500;
 }
 
 /* Mobile header */
 .mobile-header {
   display: none;
-  background: #f4f4f4;
-  border-bottom: 1px solid #ccc;
-  padding: 0.5em 1em;
+  background: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+  padding: 0.8em 1em;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.mobile-header h2 {
-  margin: 0;
+.mobile-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
 }
 
-.mobile-header ul {
-  list-style: none;
-  margin: 0.5em 0 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
+.mobile-nav a {
+  margin-right: 1em;
+  color: #333;
 }
 
-.mobile-header ul li {
-  margin: 0;
+/* Main content */
+.content {
+  flex: 1;
+  padding: 2em;
+  max-width: 800px;
 }
 
+/* Responsive rules */
 @media (max-width: 768px) {
   .sidebar {
     display: none;
   }
-  .content {
-    margin-left: 0;
-  }
   .mobile-header {
     display: block;
+  }
+  .content {
+    padding: 1.2em;
   }
 }
