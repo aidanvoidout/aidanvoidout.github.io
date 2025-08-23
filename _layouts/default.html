@@ -5,60 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <style>
-    /* Sidebar styles */
-    .sidebar {
-      width: 200px;
-      position: fixed;
-      top: 0;
-      left: -220px; /* hidden by default on mobile */
-      bottom: 0;
-      background: #f4f4f4;
-      padding: 1em;
-      border-right: 1px solid #ccc;
-      box-sizing: border-box;
-      transition: left 0.3s ease;
-      z-index: 1000;
-    }
-
-    .sidebar.open {
-      left: 0; /* slides in */
-    }
-
-    .menu-toggle {
-      position: fixed;
-      top: 1em;
-      left: 1em;
-      font-size: 1.5em;
-      background: none;
-      border: none;
-      cursor: pointer;
-      z-index: 1100;
-    }
-
-    .content {
-      margin-left: 200px; /* leave space for sidebar on desktop */
-      padding: 1em;
-    }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        left: -220px; /* keep hidden */
-      }
-
-      .sidebar.open {
-        left: 0; /* slide in */
-      }
-
-      .content {
-        margin-left: 0; /* full width */
-      }
-
-      .menu-toggle {
-        display: block;
-      }
-    }
-  </style>
+ 
 </head>
 <body>
   <button class="menu-toggle">☰</button>

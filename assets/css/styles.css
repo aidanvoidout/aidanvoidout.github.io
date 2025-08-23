@@ -1,0 +1,52 @@
+/* Sidebar + responsive menu */
+.sidebar {
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: -220px; /* hidden by default on mobile */
+  bottom: 0;
+  background: #f4f4f4;
+  padding: 1em;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.menu-toggle {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.content {
+  margin-left: 200px;
+  padding: 1em;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    left: -220px;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
