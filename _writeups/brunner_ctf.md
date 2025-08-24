@@ -246,7 +246,7 @@ to bypass this, note that the `$PWD` constant, referring to the path to the root
 
 we can use string slicing to extract the first character of $PWD and combine it with the original `cat` splitting and `$IFS` to cat `/flag.txt`.
 
-final payload: `;'c''at'${IFS}${PWD:0:1}/flag.txt`
+final payload: `;'c''at'${IFS}${PWD:0:1}flag.txt`
 
 flag: `brunner{d1d_1_f0rg37_70_b4n_s0m3_ch4rz?}`
 
