@@ -61,6 +61,7 @@ a:hover {
   font-weight: 500;
 }
 
+/* Mobile single-row nav bar */
 .mobile-nav-bar {
   display: none; /* hidden on desktop */
   background: #f7f7f7;
@@ -85,12 +86,15 @@ a:hover {
 .content {
   flex: 1;
   padding: 2em;
-  max-width: 800px;
+  max-width: 800px; /* desktop width */
+  width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word; /* wrap long words */
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6,
-.sidebar, .mobile-header, .nav-links a {
+.sidebar, .mobile-nav-bar, .nav-links a {
   font-family: inherit;
   font-weight: 600;
   margin: 1.2em 0 0.6em;
@@ -110,7 +114,9 @@ pre, code {
 
 pre {
   padding: 1em;
-  overflow-x: auto;
+  overflow-x: auto; /* scroll if too long */
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Rouge syntax highlighting */
@@ -121,7 +127,6 @@ pre {
   overflow-x: auto;
 }
 
-/* Example GitHub-like Rouge token colors */
 .highlight .c  { color: #6a737d; font-style: italic } /* Comment */
 .highlight .k  { color: #d73a49 } /* Keyword */
 .highlight .o  { color: #d73a49 } /* Operator */
@@ -133,15 +138,40 @@ pre {
 .highlight .nt { color: #22863a } /* Tag */
 .highlight .na { color: #6f42c1 } /* Attribute */
 
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+  display: block; /* scroll on mobile if too wide */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  text-align: left;
+}
+
+/* Images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Responsive rules */
 @media (max-width: 768px) {
   .sidebar {
     display: none;
   }
+
   .mobile-nav-bar {
     display: block;
   }
+
   .content {
-    padding: 1.5em 1.2em; /* no extra top padding needed */
+    padding: 1.5em;
+    max-width: 100%; /* allow full width */
+    word-break: break-word;
+    overflow-x: auto; /* scroll for very wide content */
   }
 }
