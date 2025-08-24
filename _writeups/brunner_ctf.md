@@ -432,3 +432,90 @@ The flag is stashed at key -1:
 this.backing[-1] = fs.readFileSync("./flag.txt");
 ```
 
+js has a language quirk where negative indexes are just string properties ("-1"), not elements. but `this.backing[-1]` still returns the value: property lookup works for any string key.
+
+every 'array' in the VM is a slice of `this.backing`.
+```
+backing[B]         = size
+backing[B + 1]     = elem[0]
+backing[B + 2]     = elem[1]
+...
+```
+
+addressing an element uses:
+```
+B + idx + 1
+```
+
+and there’s a bounds check `idx < size`. (notice how there’s no check that the final computed address is non‑negative.)
+
+creating a new VM array chooses its base by walking past the previous one:
+```
+newBacking = lastBacking + lastSize + 1;
+```
+
+so we have our exploit path: if we can make `lastSize` negative enough, `newBacking` becomes negative, and then choosing an `idx` can hit `-1` (the flag).
+
+in js, all numbers are IEEE‑754 doubles (53 bits of integer precision). essentially, this means that:
+- every integer is exactly representable up to `2^53` (= 9007199254740992).
+
+- for numbers `≥ 2^53`, the spacing between representable integers becomes `2`.
+So `2^53 + 1` rounds to `2^53`; the next representable is `2^53 + 2`.
+
+two places in the VM add +1:
+
+- when placing the next array: `newBacking = lastBacking + lastSize + 1`
+
+- when computing an element address: `B + idx + 1`.
+
+if we force a base B to be exactly `2^53`, then `B + 1` rounds back to `B`, which means `elem[0]` aliases the header (which is at B). this gives us a header‑overwrite primitive: any write to `elem[0]` will write to the size field instead.
+
+to get such a `B` we make the previous array's size `2^53`.
+```
+newBacking = lastBacking + lastSize + 1
+           = 0 + 2^53 + 1
+```
+
+once we can write to the size field of array #1 via its `elem[0]`, we set it to a large negative number. this will cause the next `NEW` to
+```
+B_next = B_alias + size_overwritten + 1
+       = 2^53   + ( -2^53 - x ) + 1
+       = -x + 1
+```
+
+we pick `x` to be `4`, so that `B_next` = `-3`. this is because if `x` were `2`, `B_next` = `-2 + 1` = `-1`, which places the next array's header at `-1`, writing over the flag.
+
+with `B_next` = `-3`, the header goes to `-3` (safe), and then `elem[1]` sits at `-3 + 1 + 1` = `-1`.
+
+we can use `SUB` to compute negatives:
+```ini
+size1 = 0 - (2^53 + 4) = -2^53 - 4
+```
+
+so the following VM program will spit out the flag:
+```nginx
+# 1) Make array 0 huge (exactly 2^53) so +1 rounds away.
+NEW 9007199254740992
+
+# 2) Make array 1. Its base B ≈ 2^53. elem0 aliases its size header.
+NEW 1
+
+# 3) Prepare numbers in array 0.
+INIT 0.0 0
+INIT 0.1 9007199254740996     # = 2^53 + 4 (representable)
+
+# 4) Overwrite array 1’s size header via the aliasing bug:
+#    size1 = 0 - (2^53 + 4) = -9007199254740996
+SUB 0.0 0.1 1.0
+
+# 5) Create array 2. Base becomes negative:
+#    B2 = (2^53) + (-2^53 - 4) + 1 = -3
+NEW 2
+
+# 6) Index 1 of array 2 hits backing[-1] -> the flag buffer.
+PRINT 2.1
+```
+
+the bounds check (```if (!(idx < arrSize)) throw ...```) implemented doesn't help here because this only violates logic, not the physical address. the VM never verifies that size is non‑negative or a safe integer.   
+
+flag: `<i didnt note down what the flag was :p will update once someone posts a writeup in chat>`
