@@ -373,3 +373,62 @@ export const config = {
 
 which is effectively impossible to override because the check is hardcoded
 
+for context, the next.js framework sometimes issues subrequests (e.g., prefetching or API calls triggered by middleware itself).
+
+to avoid infinite loops (middleware calling itself repeatedly), Next.js uses an internal header:
+
+`x-middleware-subrequest`
+
+
+this header carries a colon-separated list of middleware names that have already been executed.
+
+Before running, `runMiddleware()`checks:
+
+```js
+const subreq = request.headers["x-middleware-subrequest"];
+const subrequests = typeof subreq === "string" ? subreq.split(":") : [];
+
+if (subrequests.includes(middlewareInfo.name)) {
+    // Skip this middleware entirely
+    return NextResponse.next();
+}
+```
+
+if the header says "middleware" already ran, Next.js skips it.
+
+doing some googling to find any potential vulnerability yields this report on [CVE-2025-29927 Next.js Middleware Authorization Bypass](https://projectdiscovery.io/blog/nextjs-middleware-authorization-bypass)
+
+quote: 
+```
+The vulnerability in CVE-2025-29927 stems from a design flaw in how Next.js processes the x-middleware-subrequest header. This header was originally intended for internal use within the Next.js framework to prevent infinite middleware execution loops.When a Next.js application uses middleware, the runMiddleware function is called to process incoming requests. As part of its functionality, this function checks for the presence of the x-middleware-subrequest header. If this header exists and contains a specific value, the middleware execution is skipped entirely, and the request is forwarded directly to its original destination via NextResponse.next().
+```
+
+reading the dependencies:
+```text
+"packages": { "": { "name": "epic-cake-battles", "version": "0.1.0", "dependencies": { "next": "15.2.2", "react": "^19.0.0", "react-dom": "^19.0.0" }, ...
+```
+
+referring to the above article to view the correct exploit (version `13.2.0` and later:)
+
+```text
+Alternatively, for projects using a /src directory structure:
+
+x-middleware-subrequest: src/middleware:src/middleware:src/middleware:src/middleware:
+```
+
+literally just add the above as a header to the request and it will yield the flag.
+
+flag: `brunner{0th3llo-iz-b3st-cake}`
+
+
+## > ArrayVM (Web)
+the website allows us to script in an array indexing-based programming language (that happens to be implemented in js)
+
+there’s one real storage: `this.backing`, a plain Array (i.e., a sparse object with special behavior for non‑negative 32‑bit indices).
+
+The flag is stashed at key -1:
+
+```js
+this.backing[-1] = fs.readFileSync("./flag.txt");
+```
+
