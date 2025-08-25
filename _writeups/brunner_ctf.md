@@ -2,6 +2,7 @@
 layout: page
 title: "brunnerCTF post-mortem"
 ---
+# BrunnerCTF writeups and postmortem
 
 ## > Brunner's Bakery (Web, 100)
 The challenge description:
