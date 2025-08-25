@@ -5,10 +5,10 @@ title: "brunnerCTF post-mortem"
 # BrunnerCTF writeups and postmortem
 
 ## > Brunner's Bakery (Web, 100)
-The challenge description:
+the challenge description:
 `Recent Graphs show that we need some more Quality of Life recipes! Can you go check if the bakery is hiding any?!`
 
-This, and from the source code
+this, and from the source code
 ```html
 <!DOCTYPE html> 
 <html> 
@@ -383,7 +383,7 @@ to avoid infinite loops (middleware calling itself repeatedly), Next.js uses an 
 
 this header carries a colon-separated list of middleware names that have already been executed.
 
-Before running, `runMiddleware()`checks:
+before running, `runMiddleware()`checks:
 
 ```js
 const subreq = request.headers["x-middleware-subrequest"];
@@ -427,7 +427,7 @@ the website allows us to script in an array indexing-based programming language 
 
 there’s one real storage: `this.backing`, a plain Array (i.e., a sparse object with special behavior for non‑negative 32‑bit indices).
 
-The flag is stashed at key -1:
+the flag is stashed at key -1:
 
 ```js
 this.backing[-1] = fs.readFileSync("./flag.txt");
