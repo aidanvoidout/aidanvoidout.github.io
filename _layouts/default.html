@@ -6,7 +6,7 @@ layout: compress
 {% include header.html %}
 
 <body data-theme="{{ site.mode }}" class="notransition">
-
+  
   <script>
     const body = document.body;
     const data = body.getAttribute("data-theme");
@@ -35,4 +35,37 @@ layout: compress
     {% include footer.html %}
   </div>
 </body>
+<style>
+/* ===== Floating Tooltip ===== */
+
+.floating-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: rgba(20, 20, 25, 0.95);
+  color: #f1f1f1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  max-width: 260px;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate(-50%, -120%);
+  transition: opacity 0.15s ease;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+@media (prefers-color-scheme: light) {
+  .floating-tooltip {
+    background: rgba(30, 30, 35, 0.95);
+    color: #fff;
+  }
+}
+
+.tooltip {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+</style>
 </html>

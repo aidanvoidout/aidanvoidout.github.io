@@ -29,3 +29,4 @@
       : area.classList.remove("blurry");
   });
 })();
+
