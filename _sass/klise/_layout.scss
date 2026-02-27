@@ -226,8 +226,7 @@
 // List of posts
 .post-item {
   display: flex;
-  padding-top: 5px;
-  padding-bottom: 6px;
+  padding: 5px 0;
   @extend %clearfix;
 
   &:not(:first-child) {
@@ -245,20 +244,39 @@
     }
   }
 
-  .post-item-title {
-    margin: 0;
-    border: 0;
-    padding: 0;
-    font-size: $base-font-size;
-    font-weight: normal;
-    letter-spacing: 0.1px;
+  .post-item-content {
+    flex: 1;
 
-    a {
-      color: $text-base-color;
+    .post-item-title {
+      margin: 0;
+      border: 0;
+      padding: 0;
+      font-size: $base-font-size;
+      font-weight: normal;
+      letter-spacing: 0.1px;
 
-      &:hover,
-      &focus {
-        color: $black;
+      a {
+        color: $text-base-color;
+
+        &:hover,
+        &:focus {
+          color: $black;
+        }
+      }
+    }
+
+    .post-item-tags {
+      margin: 2px 0 0;
+      font-size: 0.85em;
+      color: darken($text-base-color, 20%);
+
+      a {
+        text-decoration: none;
+        color: $text-base-color;
+
+        &:hover {
+          color: $black;
+        }
       }
     }
   }
