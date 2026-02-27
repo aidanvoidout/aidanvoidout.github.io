@@ -12,7 +12,7 @@ mode: dark # default theme "dark" | "light"
 # Profile settings
 author:
   name: aidan # author name
-  bio: i exist >- # tell to the world
+  bio: i exist # tell to the world
   username: aidanvoidout # general username
   github: aidanvoidout # github username
   twitter: twitter_username # twitter username

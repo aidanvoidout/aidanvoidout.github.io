@@ -23,10 +23,8 @@ comments: false
   {%- endunless -%}
   
   <article class="post-item">
-    <!-- Date column -->
     <div class="post-item-date">{{ post.date | date: "%B %-d, %Y" }}</div>
 
-    <!-- Content column -->
     <div class="post-item-content">
       <h3 class="post-item-title">
         <a href="{{ post.url }}">{{ post.title | escape }}</a>
