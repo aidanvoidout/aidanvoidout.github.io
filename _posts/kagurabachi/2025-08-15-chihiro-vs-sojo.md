@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "kagurabachi"
+title:  "sojo"
 date:   2025-08-15 09:29:20 +0700
 categories: jekyll update
 usemathjax: true

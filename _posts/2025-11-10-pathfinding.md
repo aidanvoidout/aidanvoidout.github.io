@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "v1tctf postmortem"
+title:  "pathfinding"
 date:   2025-11-10 09:29:20 +0700
 categories: jekyll update
 usemathjax: true
